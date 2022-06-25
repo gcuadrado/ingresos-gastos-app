@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Text } from 'react-native';
 import { List } from 'react-native-paper';
 
-const GastoIngresoItem = ({item}) => (
+const GastoItem = ({item}) => (
   <List.Item
     title={item.title}
     description={item.description}
@@ -11,4 +11,4 @@ const GastoIngresoItem = ({item}) => (
   />
 );
 
-export default GastoIngresoItem;
+export default GastoItem;

@@ -1,10 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState, useContext } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { TextInput, Appbar, List } from 'react-native-paper';
 import AppContext from './AppContext';
-import GastoIngresoItem from './MainComponent/GastoIngresoItem';
+import FabButton from './MainComponent/FabButton';
 import ListaGastos from './MainComponent/ListaGastos';
+import ListaIngresos from './MainComponent/ListaIngresos';
 
 
 
@@ -16,16 +17,20 @@ export default MainComponent = () => {
             <Appbar.Header>
                 <Appbar.Content title="Title" subtitle={'Subtitle'} />
             </Appbar.Header>
-            <ListaGastos />
-            <View style={styles.row} >
-                <View style={styles.column} >
-                    <TextInput
-                        label="Email"
-                        value={text}
-                        onChangeText={text => setText(text)}
-                    />
+            <ScrollView>
+                <ListaGastos />
+                <ListaIngresos />
+                <View style={styles.row} >
+                    <View style={styles.column} >
+                        <TextInput
+                            label="Email"
+                            value={text}
+                            onChangeText={text => setText(text)}
+                        />
+                    </View>
                 </View>
-            </View>
+            </ScrollView>
+            <FabButton />
         </View>
     );
 }

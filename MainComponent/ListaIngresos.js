@@ -2,11 +2,11 @@ import React, { useContext, useMemo, useState } from "react";
 import { Text } from "react-native";
 import { List } from 'react-native-paper';
 import AppContext from "../AppContext";
-import GastoItem from "./GastoItem";
+import IngresoItem from "./IngresoItem";
 
 
 
-const ListaGastos = () => {
+const ListaIngresos= () => {
     const appContext = useContext(AppContext)
     const [expanded, setExpanded] = useState(true);
     const total=useMemo(()=>{
@@ -22,7 +22,7 @@ const ListaGastos = () => {
         >
             {appContext.state.items.map(item =>
             (
-                <GastoItem
+                <IngresoItem
                     item={item}
                 />
             )
@@ -31,4 +31,4 @@ const ListaGastos = () => {
     )
 }
 
-export default ListaGastos
+export default ListaIngresos

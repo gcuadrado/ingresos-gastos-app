@@ -10,7 +10,33 @@ const initialState = {
         title: 'Suministros',
         description: 'Luz, gas, agua...',
         value: 150
-    }]
+    }, {
+        title: 'Suministros',
+        description: 'Luz, gas, agua...',
+        value: 150
+    }, {
+        title: 'Suministros',
+        description: 'Luz, gas, agua...',
+        value: 150
+    }, {
+        title: 'Suministros',
+        description: 'Luz, gas, agua...',
+        value: 150
+    },
+    {
+        title: 'Suministros',
+        description: 'Luz, gas, agua...',
+        value: 150
+    },{
+        title: 'Suministros',
+        description: 'Luz, gas, agua...',
+        value: 150
+    },{
+        title: 'Suministros',
+        description: 'Luz, gas, agua...',
+        value: 150
+    }
+    ]
 }
 
 const GlobalState = ({ children }) => {
