@@ -4,6 +4,7 @@ import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { TextInput, Appbar, Portal, Dialog, Button } from 'react-native-paper';
 import AppContext from './AppContext';
 import AddGastoItem from './MainComponent/AddGastoItem';
+import AddIngresoItem from './MainComponent/AddIngresoItem';
 import FabButton from './MainComponent/FabButton';
 import ListaGastos from './MainComponent/ListaGastos';
 import ListaIngresos from './MainComponent/ListaIngresos';
@@ -14,7 +15,6 @@ export default MainComponent = () => {
 
     const appContext = useContext(AppContext);
     const [showDialog, setShowDialog] = useState(false)
-    const [componentForDialog, setComponentForDialog] = useState(null)
     return (
         <View style={styles.container}>
             <Appbar.Header>
@@ -29,14 +29,13 @@ export default MainComponent = () => {
                     <Dialog.Title>Alert</Dialog.Title>
                     <Dialog.Content>
                         <ScrollView>
-                            <componentForDialog onSubmit={() => { setShowDialog(false) }} />
+                            <AddIngresoItem onSubmit={() => { setShowDialog(false) }} />
                         </ScrollView>
                     </Dialog.Content>
                 </Dialog>
             </Portal>
-            <FabButton onClick={(component) => {
+            <FabButton onClick={() => {
                 setShowDialog(true)
-                setComponentForDialog(component)
             }} />
         </View>
     );

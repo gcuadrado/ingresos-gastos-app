@@ -25,12 +25,12 @@ const FabButton = ({ onClick }) => {
                     {
                         icon: 'email',
                         label: 'Email',
-                        onPress: () => onClick(AddIngresoItem),
+                        onPress: () => onClick(),
                     },
                     {
                         icon: 'bell',
                         label: 'Remind',
-                        onPress: () => onClick(AddGastoItem),
+                        onPress: () => onClick(),
                     },
                 ]}
                 onStateChange={onStateChange}
