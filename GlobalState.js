@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import AppContext from "./AppContext";
 
 const initialState = {
-    items: [{
+    gastos: [{
         title: 'Alquiler',
         description: 'Esto es un alquiler',
         value: 500
@@ -10,28 +10,13 @@ const initialState = {
         title: 'Suministros',
         description: 'Luz, gas, agua...',
         value: 150
+    }
+    ],
+    ingresos: [{
+        title: 'Dinserito',
+        description: 'Esto es un alquiler',
+        value: 500
     }, {
-        title: 'Suministros',
-        description: 'Luz, gas, agua...',
-        value: 150
-    }, {
-        title: 'Suministros',
-        description: 'Luz, gas, agua...',
-        value: 150
-    }, {
-        title: 'Suministros',
-        description: 'Luz, gas, agua...',
-        value: 150
-    },
-    {
-        title: 'Suministros',
-        description: 'Luz, gas, agua...',
-        value: 150
-    },{
-        title: 'Suministros',
-        description: 'Luz, gas, agua...',
-        value: 150
-    },{
         title: 'Suministros',
         description: 'Luz, gas, agua...',
         value: 150
@@ -42,10 +27,17 @@ const initialState = {
 const GlobalState = ({ children }) => {
     const [state, setState] = useState(initialState);
 
-    function handleAddItem(item) {
+    const handleAddIngreso = (ingreso) => {
         setState({
             ...state,
-            items: [...items, item]
+            ingresos: [...state.ingresos, ingreso]
+        });
+    }
+
+    const handleAddGasto = (gasto) => {
+        setState({
+            ...state,
+            gastos: [...state.gastos, gasto]
         });
     }
 
@@ -62,8 +54,8 @@ const GlobalState = ({ children }) => {
         <AppContext.Provider
             value={{
                 state,
-                addItem: handleAddItem,
-                removeItem: handleRemoveItem
+                addIngreso: handleAddIngreso,
+                addGasto: handleAddGasto
             }}
         >
             {children}

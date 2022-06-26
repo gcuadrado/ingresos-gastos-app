@@ -10,8 +10,8 @@ const ListaGastos = () => {
     const appContext = useContext(AppContext)
     const [expanded, setExpanded] = useState(true);
     const total=useMemo(()=>{
-       return appContext.state.items.reduce((totalAcum, {value}) => totalAcum + value, 0)
-    }, [appContext.state.items])
+       return appContext.state.gastos.reduce((totalAcum, {value}) => totalAcum + value, 0)
+    }, [appContext.state.gastos])
     return (
         <List.Accordion
             title="Gastos"
@@ -20,7 +20,7 @@ const ListaGastos = () => {
             expanded={expanded}
             onPress={() => { setExpanded(!expanded) }}
         >
-            {appContext.state.items.map(item =>
+            {appContext.state.gastos.map(item =>
             (
                 <GastoItem
                     item={item}

@@ -7,7 +7,7 @@ const GastoItem = ({item}) => (
     title={item.title}
     description={item.description}
     left={props => <List.Icon {...props} icon="folder" />}
-    right={props => <Text>{item.value}€</Text>}
+    right={props => <Text>-{item.value}€</Text>}
   />
 );
 

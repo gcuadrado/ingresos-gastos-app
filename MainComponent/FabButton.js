@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { FAB, Portal } from 'react-native-paper';
+import AddGastoItem from './AddGastoItem';
+import AddIngresoItem from './AddIngresoItem';
 
-const FabButton = () => {
+const FabButton = ({ onClick }) => {
     const [state, setState] = React.useState({ open: false });
 
     const onStateChange = ({ open }) => setState({ open });
@@ -23,12 +25,12 @@ const FabButton = () => {
                     {
                         icon: 'email',
                         label: 'Email',
-                        onPress: () => console.log('Pressed email'),
+                        onPress: () => onClick(AddIngresoItem),
                     },
                     {
                         icon: 'bell',
                         label: 'Remind',
-                        onPress: () => console.log('Pressed notifications'),
+                        onPress: () => onClick(AddGastoItem),
                     },
                 ]}
                 onStateChange={onStateChange}
