@@ -10,12 +10,12 @@ const ListaGastos = () => {
     const appContext = useContext(AppContext)
     const [expanded, setExpanded] = useState(true);
     const total=useMemo(()=>{
-       return appContext.state.gastos.reduce((totalAcum, {value}) => totalAcum + value, 0)
+       return appContext.state.gastos.reduce((totalAcum, {value, units}) => totalAcum + (value*units), 0)
     }, [appContext.state.gastos])
     return (
         <List.Accordion
             title="Gastos"
-            left={props => <List.Icon {...props} icon="folder" />}
+            left={props => <List.Icon {...props} icon="currency-usd-off" />}
             right={props => <Text>{total}€</Text>}
             expanded={expanded}
             onPress={() => { setExpanded(!expanded) }}

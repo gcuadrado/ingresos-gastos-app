@@ -2,6 +2,7 @@ import * as React from 'react';
 import { FAB, Portal } from 'react-native-paper';
 import AddGastoItem from './AddGastoItem';
 import AddIngresoItem from './AddIngresoItem';
+import TIPOS_FAB_BUTTON from './tiposFabButtons';
 
 const FabButton = ({ onClick }) => {
     const [state, setState] = React.useState({ open: false });
@@ -16,21 +17,15 @@ const FabButton = ({ onClick }) => {
                 open={open}
                 icon={open ? 'window-close' : 'plus'}
                 actions={[
-                    { icon: 'plus', onPress: () => console.log('Pressed add') },
                     {
-                        icon: 'star',
-                        label: 'Star',
-                        onPress: () => console.log('Pressed star'),
+                        icon: 'cash-multiple',
+                        label: 'Ingreso',
+                        onPress: () => onClick(TIPOS_FAB_BUTTON.ADD_INGRESO),
                     },
                     {
-                        icon: 'email',
-                        label: 'Email',
-                        onPress: () => onClick(),
-                    },
-                    {
-                        icon: 'bell',
-                        label: 'Remind',
-                        onPress: () => onClick(),
+                        icon: 'currency-usd-off',
+                        label: 'Gasto',
+                        onPress: () => onClick(TIPOS_FAB_BUTTON.ADD_GASTO),
                     },
                 ]}
                 onStateChange={onStateChange}

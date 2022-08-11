@@ -1,44 +1,65 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AppContext from "./AppContext";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const initialState = {
-    gastos: [{
-        title: 'Alquiler',
-        description: 'Esto es un alquiler',
-        value: 500
-    }, {
-        title: 'Suministros',
-        description: 'Luz, gas, agua...',
-        value: 150
-    }
-    ],
-    ingresos: [{
-        title: 'Dinserito',
-        description: 'Esto es un alquiler',
-        value: 500
-    }, {
-        title: 'Suministros',
-        description: 'Luz, gas, agua...',
-        value: 150
-    }
-    ]
+    gastos: [],
+    ingresos: []
 }
+
+const persistLocally = async (state) => {
+    try {
+        await AsyncStorage.setItem(
+            '@academiaStore',
+            JSON.stringify(state)
+        );
+    } catch (error) {
+        // Error saving data
+    }
+}
+
+const retrieveStateLocally = async () => {
+    try {
+        const value = await AsyncStorage.getItem('@academiaStore')
+        if (value !== null) {
+            return JSON.parse(value)
+        }
+    } catch (e) {
+        // error reading value
+        return null
+    }
+}
+
+
 
 const GlobalState = ({ children }) => {
     const [state, setState] = useState(initialState);
 
+    useEffect(() => {
+        const retrieveData = async () => {
+            const persistedState = await retrieveStateLocally()
+            if (persistedState)
+                setState(persistedState)
+        }
+        retrieveData()
+    }, [])
+
     const handleAddIngreso = (ingreso) => {
-        setState({
+        const newState = {
             ...state,
             ingresos: [...state.ingresos, ingreso]
-        });
+        }
+        setState(newState);
+        persistLocally(newState)
     }
 
     const handleAddGasto = (gasto) => {
-        setState({
+        const newState = {
             ...state,
             gastos: [...state.gastos, gasto]
-        });
+        }
+        setState(newState);
+        persistLocally(newState)
     }
 
     function handleRemoveItem(index) {
@@ -48,6 +69,8 @@ const GlobalState = ({ children }) => {
             ...state,
             items: copy
         });
+
+
     }
 
     return (

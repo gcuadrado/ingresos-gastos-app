@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import { Button, TextInput } from "react-native-paper";
+import { Button, TextInput, Title } from "react-native-paper";
 import AppContext from "../AppContext";
 
 const AddGastoItem = ({ onSubmit }) => {
@@ -8,19 +8,22 @@ const AddGastoItem = ({ onSubmit }) => {
     const [titulo, setTitulo] = useState('')
     const [descripcion, setDescripcion] = useState('')
     const [valor, setValor] = useState(0)
+    const [unidades, setUnidades] = useState(1)
 
     const onAceptarPressed = () => {
         const gasto = {
             title: titulo,
             description: descripcion,
-            value: valor
+            value: valor,
+            units: unidades
         }
-        appContext.addGasto(ingreso)
+        appContext.addGasto(gasto)
         onSubmit()
     }
 
     return (
         <View style={styles.container}>
+            <Title>Añade un gasto</Title>
             <View style={styles.row} >
                 <View style={styles.column} >
                     <TextInput
@@ -51,8 +54,19 @@ const AddGastoItem = ({ onSubmit }) => {
             </View>
             <View style={styles.row} >
                 <View style={styles.column} >
+                    <TextInput
+                        label="Unidades"
+                        keyboardType='numeric'
+                        value={unidades.toString()}
+                        onChangeText={text => setUnidades(Number(text))}
+                    />
+                </View>
+            </View>
+            <View style={styles.row} >
+                <View style={styles.column} >
                     <Button
                         onPress={onAceptarPressed}
+                        disabled={titulo === '' || !valor}
                     >Aceptar
                     </Button>
                 </View>

@@ -6,6 +6,7 @@ import AppContext from './AppContext';
 import AddGastoItem from './MainComponent/AddGastoItem';
 import AddIngresoItem from './MainComponent/AddIngresoItem';
 import FabButton from './MainComponent/FabButton';
+import TIPOS_FAB_BUTTON from './MainComponent/tiposFabButtons';
 import ListaGastos from './MainComponent/ListaGastos';
 import ListaIngresos from './MainComponent/ListaIngresos';
 
@@ -14,31 +15,41 @@ import ListaIngresos from './MainComponent/ListaIngresos';
 export default MainComponent = () => {
 
     const appContext = useContext(AppContext);
-    const [showDialog, setShowDialog] = useState(false)
+    const [tipoDialog, setTipoDialog] = useState(null)
     return (
         <View style={styles.container}>
             <Appbar.Header>
-                <Appbar.Content title="Title" subtitle={'Subtitle'} />
+                <Appbar.Content title="Academia" subtitle={'Mañana me pongo!'} />
             </Appbar.Header>
             <ScrollView>
                 <ListaGastos />
                 <ListaIngresos />
             </ScrollView>
             <Portal>
-                <Dialog visible={showDialog} onDismiss={() => { setShowDialog(false) }}>
-                    <Dialog.Title>Alert</Dialog.Title>
+                <Dialog visible={tipoDialog} onDismiss={() => { setTipoDialog(null) }}>
                     <Dialog.Content>
                         <ScrollView>
-                            <AddIngresoItem onSubmit={() => { setShowDialog(false) }} />
+                            {GetFabButtonDialogComponent(tipoDialog, () => { setTipoDialog(null) })}
                         </ScrollView>
                     </Dialog.Content>
                 </Dialog>
             </Portal>
-            <FabButton onClick={() => {
-                setShowDialog(true)
+            <FabButton onClick={(tipo) => {
+                setTipoDialog(tipo)
             }} />
         </View>
     );
+}
+
+const GetFabButtonDialogComponent = (tipoFabButton, onSubmit) => {
+    switch (tipoFabButton) {
+        case TIPOS_FAB_BUTTON.ADD_GASTO:
+            return (<AddGastoItem onSubmit={onSubmit} />)
+        case TIPOS_FAB_BUTTON.ADD_INGRESO:
+            return (<AddIngresoItem onSubmit={onSubmit} />)
+        default:
+            return null
+    }
 }
 
 const styles = StyleSheet.create({
