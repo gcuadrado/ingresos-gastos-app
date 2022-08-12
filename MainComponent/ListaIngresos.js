@@ -10,7 +10,7 @@ const ListaIngresos = () => {
     const appContext = useContext(AppContext)
     const [expanded, setExpanded] = useState(true);
     const total = useMemo(() => {
-        return appContext.state.ingresos.reduce((totalAcum, { value, units }) => totalAcum + (value*units), 0)
+        return appContext.state.ingresos.reduce((totalAcum, { value, units }) => totalAcum + (value * units), 0)
     }, [appContext.state.ingresos])
     return (
         <List.Accordion
@@ -23,6 +23,7 @@ const ListaIngresos = () => {
             {appContext.state.ingresos.map(item =>
             (
                 <IngresoItem
+                    key={item.id}
                     item={item}
                 />
             )

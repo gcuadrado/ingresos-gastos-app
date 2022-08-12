@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AppContext from "./AppContext";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import uuid from 'react-native-uuid';
 
 const initialState = {
     gastos: [],
@@ -45,32 +46,34 @@ const GlobalState = ({ children }) => {
     }, [])
 
     const handleAddIngreso = (ingreso) => {
+        const newIngreso = { ...ingreso, id: uuid.v4() }
         const newState = {
             ...state,
-            ingresos: [...state.ingresos, ingreso]
+            ingresos: [...state.ingresos, newIngreso]
         }
         setState(newState);
         persistLocally(newState)
     }
 
     const handleAddGasto = (gasto) => {
+        const newGasto = { ...gasto, id: uuid.v4() }
         const newState = {
             ...state,
-            gastos: [...state.gastos, gasto]
+            gastos: [...state.gastos, newGasto]
         }
         setState(newState);
         persistLocally(newState)
     }
 
-    function handleRemoveItem(index) {
-        const copy = [...state.items];
-        copy.splice(index, 1);
-        setState({
-            ...state,
-            items: copy
-        });
-
-
+    const handleRemoveGasto = (id) => {
+        const newState = { ...state, gastos: [...state.gastos.filter(item => item.id !== id)] }
+        setState(newState);
+        persistLocally(newState)
+    }
+    const handleRemoveIngreso = (id) => {
+        const newState = { ...state, ingresos: [...state.ingresos.filter(item => item.id !== id)] }
+        setState(newState);
+        persistLocally(newState)
     }
 
     return (
@@ -78,7 +81,9 @@ const GlobalState = ({ children }) => {
             value={{
                 state,
                 addIngreso: handleAddIngreso,
-                addGasto: handleAddGasto
+                addGasto: handleAddGasto,
+                removeGasto: handleRemoveGasto,
+                removeIngreso: handleRemoveIngreso
             }}
         >
             {children}

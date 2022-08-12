@@ -9,8 +9,8 @@ import GastoItem from "./GastoItem";
 const ListaGastos = () => {
     const appContext = useContext(AppContext)
     const [expanded, setExpanded] = useState(true);
-    const total=useMemo(()=>{
-       return appContext.state.gastos.reduce((totalAcum, {value, units}) => totalAcum + (value*units), 0)
+    const total = useMemo(() => {
+        return appContext.state.gastos.reduce((totalAcum, { value, units }) => totalAcum + (value * units), 0)
     }, [appContext.state.gastos])
     return (
         <List.Accordion
@@ -23,6 +23,7 @@ const ListaGastos = () => {
             {appContext.state.gastos.map(item =>
             (
                 <GastoItem
+                    key={item.id}
                     item={item}
                 />
             )
