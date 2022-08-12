@@ -66,6 +66,8 @@ const AddIngresoItem = ({ onSubmit }) => {
                 <View style={styles.column} >
                     <Button
                         onPress={onAceptarPressed}
+                        mode="contained"
+                        style={{marginTop: 10}}
                         disabled={titulo === '' || !valor}
                     >Aceptar
                     </Button>

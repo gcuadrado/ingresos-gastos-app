@@ -9,6 +9,7 @@ import FabButton from './MainComponent/FabButton';
 import TIPOS_FAB_BUTTON from './MainComponent/tiposFabButtons';
 import ListaGastos from './MainComponent/ListaGastos';
 import ListaIngresos from './MainComponent/ListaIngresos';
+import BeneficioNeto from './MainComponent/BeneficioNeto';
 
 
 
@@ -19,16 +20,21 @@ export default MainComponent = () => {
     return (
         <View style={styles.container}>
             <Appbar.Header>
-                <Appbar.Content title="Academia" subtitle={'Mañana me pongo!'} />
+                <Appbar.Content title="Academia" />
             </Appbar.Header>
-            <ScrollView>
-                <ListaGastos />
-                <ListaIngresos />
-            </ScrollView>
+            <View style={{...styles.row, flex: 3}}>
+                <ScrollView>
+                    <ListaGastos />
+                    <ListaIngresos />
+                </ScrollView>
+            </View>
+            <View style={styles.row}>
+                <BeneficioNeto />
+            </View>
             <Portal>
-                <Dialog visible={tipoDialog} onDismiss={() => { setTipoDialog(null) }}>
+                <Dialog style={{ backgroundColor: 'white' }} visible={tipoDialog} onDismiss={() => { setTipoDialog(null) }}>
                     <Dialog.Content>
-                        <ScrollView>
+                        <ScrollView keyboardShouldPersistTaps={'handled'}>
                             {GetFabButtonDialogComponent(tipoDialog, () => { setTipoDialog(null) })}
                         </ScrollView>
                     </Dialog.Content>

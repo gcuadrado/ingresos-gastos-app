@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import { Button, TextInput, Title } from "react-native-paper";
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { Button, TextInput, Text } from "react-native-paper";
 import AppContext from "../AppContext";
 
 const AddGastoItem = ({ onSubmit }) => {
@@ -23,7 +23,7 @@ const AddGastoItem = ({ onSubmit }) => {
 
     return (
         <View style={styles.container}>
-            <Title>Añade un gasto</Title>
+            <Text variant="headlineSmall">Añade un gasto</Text>
             <View style={styles.row} >
                 <View style={styles.column} >
                     <TextInput
@@ -66,6 +66,8 @@ const AddGastoItem = ({ onSubmit }) => {
                 <View style={styles.column} >
                     <Button
                         onPress={onAceptarPressed}
+                        mode="contained"
+                        style={{marginTop: 10}}
                         disabled={titulo === '' || !valor}
                     >Aceptar
                     </Button>

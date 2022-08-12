@@ -18,15 +18,16 @@ const FabButton = ({ onClick }) => {
                 icon={open ? 'window-close' : 'plus'}
                 actions={[
                     {
-                        icon: 'cash-multiple',
-                        label: 'Ingreso',
-                        onPress: () => onClick(TIPOS_FAB_BUTTON.ADD_INGRESO),
-                    },
-                    {
                         icon: 'currency-usd-off',
                         label: 'Gasto',
                         onPress: () => onClick(TIPOS_FAB_BUTTON.ADD_GASTO),
                     },
+                    {
+                        icon: 'cash-multiple',
+                        label: 'Ingreso',
+                        onPress: () => onClick(TIPOS_FAB_BUTTON.ADD_INGRESO),
+                    }
+                  
                 ]}
                 onStateChange={onStateChange}
                 onPress={() => {

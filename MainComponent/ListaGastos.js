@@ -16,7 +16,7 @@ const ListaGastos = () => {
         <List.Accordion
             title="Gastos"
             left={props => <List.Icon {...props} icon="currency-usd-off" />}
-            right={props => <Text>{total}€</Text>}
+            right={props => <Text>-{total}€</Text>}
             expanded={expanded}
             onPress={() => { setExpanded(!expanded) }}
         >
