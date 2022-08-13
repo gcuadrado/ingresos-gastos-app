@@ -5,7 +5,9 @@ import uuid from 'react-native-uuid';
 
 const initialState = {
     gastos: [],
-    ingresos: []
+    ingresos: [],
+    tipoIva: 0.21,
+    tipoIrpf: 0.15
 }
 
 const persistLocally = async (state) => {

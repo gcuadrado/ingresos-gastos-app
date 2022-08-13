@@ -9,14 +9,20 @@ import IngresoItem from "./IngresoItem";
 const ListaIngresos = () => {
     const appContext = useContext(AppContext)
     const [expanded, setExpanded] = useState(true);
-    const total = useMemo(() => {
-        return appContext.state.ingresos.reduce((totalAcum, { value, units }) => totalAcum + (value * units), 0)
+    const facturacion = useMemo(() => {
+        const totalIngresos= appContext.state.ingresos.reduce((totalAcum, { value, units }) => totalAcum + (value * units), 0)
+        const totalIva=totalIngresos*appContext.state.tipoIva
+        return {
+            totalIngresos,
+            totalIva,
+            totalNeto:totalIngresos-totalIva
+        }
     }, [appContext.state.ingresos])
     return (
         <List.Accordion
             title="Ingresos"
             left={props => <List.Icon {...props} icon="cash-multiple" />}
-            right={props => <Text>{total}€</Text>}
+            right={props => <Text>{facturacion.totalNeto}€ (IVA: {facturacion.totalIva}€)</Text>}
             expanded={expanded}
             onPress={() => { setExpanded(!expanded) }}
         >
